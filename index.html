@@ -3,338 +3,683 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John Doe | Full Stack Developer</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Resume Builder - Create Professional Resumes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <meta name="description" content="Professional portfolio of John Doe - Full Stack Developer with 5+ years of experience in web development, React, Node.js, and cloud technologies.">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="#home" class="logo">JD</a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --border: #e2e8f0;
+        }
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>John Doe</h1>
-                <h2>Full Stack Developer</h2>
-                <p>Building scalable web applications and creating seamless user experiences with modern technologies. Passionate about clean code, performance optimization, and continuous learning.</p>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                    <a href="#projects" class="btn btn-secondary">View My Work</a>
-                </div>
-                <div class="social-links">
-                    <a href="https://linkedin.com/in/johndoe" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/johndoe" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://twitter.com/johndoe" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="mailto:john.doe@email.com"><i class="fas fa-envelope"></i></a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="profile-img">
-                    <i class="fas fa-user"></i>
-                </div>
-            </div>
-        </div>
-    </section>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>I am a passionate Full Stack Developer with over 5 years of experience building web applications. I specialize in JavaScript technologies including React, Node.js, and TypeScript. My journey started with curiosity about how websites work, and it has evolved into a rewarding career creating digital products that make a difference.</p>
-                    <p>Throughout my career, I have worked with startups and established companies, contributing to products that serve thousands of users. I believe in writing clean, maintainable code and continuously learning new technologies to stay ahead in this rapidly evolving field.</p>
-                    <p>When I'm not coding, you can find me contributing to open-source projects, writing technical blog posts, or exploring new frameworks and tools. I'm always open to connecting with fellow developers and discussing new opportunities.</p>
-                </div>
-                <div class="about-stats">
-                    <div class="stat-card">
-                        <h3>5+</h3>
-                        <p>Years Experience</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>50+</h3>
-                        <p>Projects Completed</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>30+</h3>
-                        <p>Happy Clients</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>10+</h3>
-                        <p>Open Source Contributions</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        body {
+            background: var(--light);
+            color: var(--dark);
+            min-height: 100vh;
+        }
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3><i class="fab fa-js"></i> Frontend</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span>React.js</span>
-                            <div class="progress-bar"><div class="progress" style="width: 95%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Vue.js</span>
-                            <div class="progress-bar"><div class="progress" style="width: 85%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span>TypeScript</span>
-                            <div class="progress-bar"><div class="progress" style="width: 90%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span>HTML5/CSS3</span>
-                            <div class="progress-bar"><div class="progress" style="width: 95%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span>SASS/SCSS</span>
-                            <div class="progress-bar"><div class="progress" style="width: 88%"></div></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-server"></i> Backend</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span>Node.js</span>
-                            <div class="progress-bar"><div class="progress" style="width: 92%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Python</span>
-                            <div class="progress-bar"><div class="progress" style="width: 85%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Express.js</span>
-                            <div class="progress-bar"><div class="progress" style="width: 90%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span>REST APIs</span>
-                            <div class="progress-bar"><div class="progress" style="width: 95%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span>GraphQL</span>
-                            <div class="progress-bar"><div class="progress" style="width: 80%"></div></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-database"></i> Databases</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span>MongoDB</span>
-                            <div class="progress-bar"><div class="progress" style="width: 90%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span>PostgreSQL</span>
-                            <div class="progress-bar"><div class="progress" style="width: 85%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span>MySQL</span>
-                            <div class="progress-bar"><div class="progress" style="width: 82%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Redis</span>
-                            <div class="progress-bar"><div class="progress" style="width: 78%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Firebase</span>
-                            <div class="progress-bar"><div class="progress" style="width: 88%"></div></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-cloud"></i> Tools & Cloud</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span>AWS</span>
-                            <div class="progress-bar"><div class="progress" style="width: 82%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Docker</span>
-                            <div class="progress-bar"><div class="progress" style="width: 85%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Git</span>
-                            <div class="progress-bar"><div class="progress" style="width: 95%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span>CI/CD</span>
-                            <div class="progress-bar"><div class="progress" style="width: 80%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Linux</span>
-                            <div class="progress-bar"><div class="progress" style="width: 78%"></div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
-        <div class="container">
-            <h2 class="section-title">Work Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">2021 - Present</div>
-                    <div class="timeline-content">
-                        <h3>Senior Full Stack Developer</h3>
-                        <h4>TechCorp Solutions</h4>
-                        <p>Leading a team of 5 developers building enterprise-level web applications. Architected and implemented a microservices-based system that reduced deployment time by 40%. Mentored junior developers and conducted code reviews. Collaborated with product managers to define technical requirements and timelines.</p>
-                        <ul>
-                            <li>Led development of customer-facing dashboard serving 50,000+ daily active users</li>
-                            <li>Implemented CI/CD pipelines reducing release cycle from weekly to daily</li>
-                            <li>Optimized database queries improving response times by 60%</li>
-                            <li>Introduced TypeScript adoption across frontend team</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">2019 - 2021</div>
-                    <div class="timeline-content">
-                        <h3>Full Stack Developer</h3>
-                        <h4>StartupXYZ</h4>
-                        <p>Built and maintained multiple client projects using React, Node.js, and MongoDB. Worked in an agile environment with 2-week sprint cycles. Integrated third-party APIs and payment gateways. Participated in technical discussions and architectural decisions.</p>
-                        <ul>
-                            <li>Developed e-commerce platform processing $1M+ in monthly transactions</li>
-                            <li>Created real-time notification system using WebSockets</li>
-                            <li>Built admin dashboard with analytics and reporting features</li>
-                            <li>Reduced application bundle size by 35% through code splitting</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">2018 - 2019</div>
-                    <div class="timeline-content">
-                        <h3>Junior Web Developer</h3>
-                        <h4>Digital Agency Inc.</h4>
-                        <p>Developed responsive websites and web applications for various clients. Collaborated with designers to implement pixel-perfect UIs. Maintained and updated existing client websites. Participated in code reviews and knowledge sharing sessions.</p>
-                        <ul>
-                            <li>Built 15+ responsive websites for small businesses</li>
-                            <li>Learned modern JavaScript frameworks and best practices</li>
-                            <li>Implemented SEO best practices improving client rankings</li>
-                            <li>Provided technical support and maintenance for client sites</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-icon"><i class="fas fa-shopping-cart"></i></div>
-                    <h3>E-Commerce Platform</h3>
-                    <p>A full-featured online store with user authentication, shopping cart, payment processing, order management, and admin dashboard. Built with React, Node.js, MongoDB, and Stripe integration.</p>
-                    <div class="project-tags">
-                        <span>React</span>
-                        <span>Node.js</span>
-                        <span>MongoDB</span>
-                        <span>Stripe</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
-                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-icon"><i class="fas fa-tasks"></i></div>
-                    <h3>Project Management App</h3>
-                    <p>A collaborative project management tool with real-time updates, task assignment, file sharing, and team communication. Features drag-and-drop Kanban boards and Gantt charts.</p>
-                    <div class="project-tags">
-                        <span>Vue.js</span>
-                        <span>Firebase</span>
-                        <span>Tailwind</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
-                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Analytics Dashboard</h3>
-                    <p>Interactive data visualization dashboard for tracking business metrics. Features customizable charts, data export, automated reports, and role-based access control.</p>
-                    <div class="project-tags">
-                        <span>React</span>
-                        <span>TypeScript</span>
-                        <span>D3.js</span>
-                        <span>PostgreSQL</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
-                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-icon"><i class="fas fa-comments"></i></div>
-                    <h3>Real-Time Chat Application</h3>
-                    <p>Feature-rich chat application with private messaging, group chats, file sharing, and video calls. Uses WebSockets for real-time communication and encryption for security.</p>
-                    <div class="project-tags">
-                        <span>Node.js</span>
-                        <span>Socket.io</span>
-                        <span>Redis</span>
-                        <span>WebRTC</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
-                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-icon"><i class="fas fa-book-open"></i></div>
-                    <h3>Blog Platform</h3>
-                    <p>A modern blog platform with markdown support, categories, tags, commenting system, newsletter subscription, and SEO optimization. Includes admin panel for content management.</p>
-                    <div class="project-tags">
-                        <span>Next.js</span>
-                        <span>Prisma</span>
-                        <span>PostgreSQL</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
-                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-icon"><i class="fas fa-utensils"></i></div>
-                    <h3>Food Delivery App</h3>
-                    <p>End-to-end food delivery solution with restaurant listings, menu management, order tracking, driver allocation, and real-time map tracking.</p>
-                    <div class="project-tags">
-                        <span>React Native</span>
-                        <span>Node.js</span>
-                        <span>AWS</span>
-                        <span>MongoDB</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--dark);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: var(--white);
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            min-height: calc(100vh - 80px);
+        }
+
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Editor Section */
+        .editor-section {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .editor-tabs {
+            display: flex;
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            overflow-x: auto;
+        }
+
+        .editor-tab {
+            padding: 1rem 1.5rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--secondary);
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .editor-tab:hover {
+            color: var(--primary);
+        }
+
+        .editor-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            background: var(--white);
+        }
+
+        .editor-content {
+            padding: 2rem;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Entry Items */
+        .entry-item {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .entry-title {
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .entry-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .entry-actions button {
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+
+        .edit-btn {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .delete-btn {
+            background: var(--danger);
+            color: var(--white);
+        }
+
+        .add-entry-btn {
+            width: 100%;
+            padding: 1rem;
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            background: none;
+            color: var(--secondary);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .add-entry-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        /* Preview Section */
+        .preview-section {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 100px;
+        }
+
+        .preview-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .preview-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .template-selector {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .template-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            background: var(--white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .template-btn:hover,
+        .template-btn.active {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .preview-container {
+            padding: 2rem;
+            background: #525659;
+            min-height: 600px;
+            overflow: auto;
+        }
+
+        .resume-preview {
+            background: var(--white);
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Template Styles */
+        /* Modern Template */
+        .template-modern .resume-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 2.5rem;
+        }
+
+        .template-modern .resume-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .template-modern .resume-title {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .template-modern .resume-contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .template-modern .resume-contact span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .template-modern .resume-body {
+            padding: 2rem;
+        }
+
+        .template-modern .resume-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .template-modern .resume-section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .template-modern .resume-item {
+            margin-bottom: 1rem;
+        }
+
+        .template-modern .resume-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.25rem;
+        }
+
+        .template-modern .resume-item-title {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .template-modern .resume-item-date {
+            color: var(--secondary);
+            font-size: 0.875rem;
+        }
+
+        .template-modern .resume-item-subtitle {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .template-modern .resume-item-description {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .template-modern .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .template-modern .skill-tag {
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+        }
+
+        /* Classic Template */
+        .template-classic .resume-header {
+            padding: 2rem;
+            border-bottom: 3px solid var }
+
+        .template(--dark);
+       -classic .resume-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .template-classic .resume-title {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .template-classic .resume-contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .template-classic .resume-body {
+            padding: 2rem;
+        }
+
+        .template-classic .resume-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .template-classic .resume-section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .template-classic .resume-item {
+            margin-bottom: 1rem;
+        }
+
+        .template-classic .resume-item-title {
+            font-weight: 700;
+        }
+
+        .template-classic .resume-item-subtitle {
+            color: var(--secondary);
+            font-style: italic;
+        }
+
+        /* Minimal Template */
+        .template-minimal .resume-header {
+            padding: 3rem 2rem;
+            text-align: center;
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        .template-minimal .resume-name {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .template-minimal .resume-title {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .template-minimal .resume-contact {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 0.875rem;
+        }
+
+        .template-minimal .resume-body {
+            padding: 2.5rem;
+        }
+
+        .template-minimal .resume-section {
+            margin-bottom: 2rem;
+        }
+
+        .template-minimal .resume-section-title {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* Print Styles */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .resume-preview, .resume-preview * {
+                visibility: visible;
+            }
+            .resume-preview {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                box-shadow: none;
+            }
+            .preview-container {
+                padding: 0;
+                background: white;
+            }
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlide 0.3s ease;
+        }
+
+        @keyframes modalSlide {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: var(--light);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.25rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--secondary);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Skills Input */
+        .skills-input-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .skill-input-tag {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0
