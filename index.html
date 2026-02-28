@@ -3,683 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume Builder - Create Professional Resumes</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #64748b;
-            --success: #10b981;
-            --danger: #ef4444;
-            --light: #f8fafc;
-            --dark: #1e293b;
-            --white: #ffffff;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            --border: #e2e8f0;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-        }
-
-        body {
-            background: var(--light);
-            color: var(--dark);
-            min-height: 100vh;
-        }
-
-        /* Header */
-        header {
-            background: var(--white);
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: var(--white);
-            color: var(--dark);
-            border: 2px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        .btn-success {
-            background: var(--success);
-            color: var(--white);
-        }
-
-        .btn-success:hover {
-            background: #059669;
-        }
-
-        .btn-danger {
-            background: var(--danger);
-            color: var(--white);
-        }
-
-        .btn-danger:hover {
-            background: #dc2626;
-        }
-
-        .btn-sm {
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
-        }
-
-        /* Main Layout */
-        .main-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            min-height: calc(100vh - 80px);
-        }
-
-        @media (max-width: 1024px) {
-            .main-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Editor Section */
-        .editor-section {
-            background: var(--white);
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-        }
-
-        .editor-tabs {
-            display: flex;
-            background: var(--light);
-            border-bottom: 1px solid var(--border);
-            overflow-x: auto;
-        }
-
-        .editor-tab {
-            padding: 1rem 1.5rem;
-            border: none;
-            background: none;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--secondary);
-            white-space: nowrap;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
-        }
-
-        .editor-tab:hover {
-            color: var(--primary);
-        }
-
-        .editor-tab.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
-            background: var(--white);
-        }
-
-        .editor-content {
-            padding: 2rem;
-            max-height: 70vh;
-            overflow-y: auto;
-        }
-
-        .form-section {
-            display: none;
-        }
-
-        .form-section.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .form-group textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        @media (max-width: 600px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Entry Items */
-        .entry-item {
-            background: var(--light);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            position: relative;
-        }
-
-        .entry-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .entry-title {
-            font-weight: 700;
-            color: var(--dark);
-        }
-
-        .entry-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .entry-actions button {
-            padding: 0.4rem 0.8rem;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.875rem;
-            transition: all 0.3s ease;
-        }
-
-        .edit-btn {
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .delete-btn {
-            background: var(--danger);
-            color: var(--white);
-        }
-
-        .add-entry-btn {
-            width: 100%;
-            padding: 1rem;
-            border: 2px dashed var(--border);
-            border-radius: 12px;
-            background: none;
-            color: var(--secondary);
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .add-entry-btn:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: rgba(37, 99, 235, 0.05);
-        }
-
-        /* Preview Section */
-        .preview-section {
-            background: var(--white);
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 100px;
-        }
-
-        .preview-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .preview-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-        }
-
-        .template-selector {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .template-btn {
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            background: var(--white);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .template-btn:hover,
-        .template-btn.active {
-            border-color: var(--primary);
-            background: rgba(37, 99, 235, 0.1);
-        }
-
-        .preview-container {
-            padding: 2rem;
-            background: #525659;
-            min-height: 600px;
-            overflow: auto;
-        }
-
-        .resume-preview {
-            background: var(--white);
-            width: 210mm;
-            min-height: 297mm;
-            margin: 0 auto;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Template Styles */
-        /* Modern Template */
-        .template-modern .resume-header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: var(--white);
-            padding: 2.5rem;
-        }
-
-        .template-modern .resume-name {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .template-modern .resume-title {
-            font-size: 1.25rem;
-            opacity: 0.9;
-            margin-bottom: 1rem;
-        }
-
-        .template-modern .resume-contact {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .template-modern .resume-contact span {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .template-modern .resume-body {
-            padding: 2rem;
-        }
-
-        .template-modern .resume-section {
-            margin-bottom: 1.5rem;
-        }
-
-        .template-modern .resume-section-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--primary);
-        }
-
-        .template-modern .resume-item {
-            margin-bottom: 1rem;
-        }
-
-        .template-modern .resume-item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 0.25rem;
-        }
-
-        .template-modern .resume-item-title {
-            font-weight: 700;
-            font-size: 1rem;
-        }
-
-        .template-modern .resume-item-date {
-            color: var(--secondary);
-            font-size: 0.875rem;
-        }
-
-        .template-modern .resume-item-subtitle {
-            color: var(--secondary);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .template-modern .resume-item-description {
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .template-modern .skills-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .template-modern .skill-tag {
-            background: var(--light);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-        }
-
-        /* Classic Template */
-        .template-classic .resume-header {
-            padding: 2rem;
-            border-bottom: 3px solid var }
-
-        .template(--dark);
-       -classic .resume-name {
-            font-size: 2.5rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 0.5rem;
-        }
-
-        .template-classic .resume-title {
-            font-size: 1.1rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-
-        .template-classic .resume-contact {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            font-size: 0.875rem;
-        }
-
-        .template-classic .resume-body {
-            padding: 2rem;
-        }
-
-        .template-classic .resume-section {
-            margin-bottom: 1.5rem;
-        }
-
-        .template-classic .resume-section-title {
-            font-size: 1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .template-classic .resume-item {
-            margin-bottom: 1rem;
-        }
-
-        .template-classic .resume-item-title {
-            font-weight: 700;
-        }
-
-        .template-classic .resume-item-subtitle {
-            color: var(--secondary);
-            font-style: italic;
-        }
-
-        /* Minimal Template */
-        .template-minimal .resume-header {
-            padding: 3rem 2rem;
-            text-align: center;
-            background: var(--dark);
-            color: var(--white);
-        }
-
-        .template-minimal .resume-name {
-            font-size: 2.5rem;
-            font-weight: 300;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
-
-        .template-minimal .resume-title {
-            font-size: 1rem;
-            opacity: 0.8;
-            margin-bottom: 1.5rem;
-        }
-
-        .template-minimal .resume-contact {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            font-size: 0.875rem;
-        }
-
-        .template-minimal .resume-body {
-            padding: 2.5rem;
-        }
-
-        .template-minimal .resume-section {
-            margin-bottom: 2rem;
-        }
-
-        .template-minimal .resume-section-title {
-            font-size: 0.875rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        /* Print Styles */
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-            .resume-preview, .resume-preview * {
-                visibility: visible;
-            }
-            .resume-preview {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                box-shadow: none;
-            }
-            .preview-container {
-                padding: 0;
-                background: white;
-            }
-        }
-
-        /* Modal */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 2rem;
-            max-width: 600px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: modalSlide 0.3s ease;
-        }
-
-        @keyframes modalSlide {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .modal-close {
-            width: 36px;
-            height: 36px;
-            border: none;
-            background: var(--light);
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.25rem;
-        }
-
-        .modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 3rem;
-            color: var(--secondary);
-        }
-
-        .empty-state i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-
-        /* Skills Input */
-        .skills-input-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .skill-input-tag {
-            background: var(--primary);
-            color: var(--white);
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            gap: 0
+    <title>Free Online Resume Builder | Create Professional CV</title>
+    <meta name="description" content="Create professional resumes instantly with our free, easy-to-use resume builder. Download as PDF and land your dream job.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for Professional Look -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>ResumeMaker Pro</h1>
+            <p>Create your professional resume in minutes.</p>
+        </div>
+    </header>
+
+    <div class="main-container">
+        
+        <!-- LEFT SIDE: Input Form -->
+        <div class="editor-section">
+            <h2>Edit Details</h2>
+            
+            <form id="resumeForm">
+                <div class="form-group">
+                    <h3>Personal Info</h3>
+                    <input type="text" id="name" placeholder="Full Name" oninput="updateResume()">
+                    <input type="text" id="jobtitle" placeholder="Job Title" oninput="updateResume()">
+                    <input type="text" id="phone" placeholder="Phone Number" oninput="updateResume()">
+                    <input type="email" id="email" placeholder="Email Address" oninput="updateResume()">
+                    <input type="text" id="linkedin" placeholder="LinkedIn URL" oninput="updateResume()">
+                </div>
+
+                <div class="form-group">
+                    <h3>Professional Summary</h3>
+                    <textarea id="summary" rows="4" placeholder="Write a brief summary about yourself..." oninput="updateResume()"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <h3>Skills (Comma separated)</h3>
+                    <input type="text" id="skills" placeholder="HTML, CSS, JavaScript, Marketing..." oninput="updateResume()">
+                </div>
+
+                <div class="form-group">
+                    <h3>Experience</h3>
+                    <textarea id="experience" rows="4" placeholder="Job Title at Company (Year - Year)&#10;Describe your responsibilities..." oninput="updateResume()"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <h3>Education</h3>
+                    <textarea id="education" rows="4" placeholder="Degree / School Name (Year - Year)..." oninput="updateResume()"></textarea>
+                </div>
+            </form>
+        </div>
+
+        <!-- RIGHT SIDE: Live Preview -->
+        <div class="preview-section">
+            <div id="resumePreview" class="paper">
+                <div class="resume-header">
+                    <h1 id="previewName">Your Name</h1>
+                    <p id="previewJobtitle">Job Title</p>
+                    <div class="contact-info">
+                        <span id="previewPhone">Phone</span> | 
+                        <span id="previewEmail">Email</span> | 
+                        <span id="previewLinkedin">LinkedIn</span>
+                    </div>
+                </div>
+                
+                <div class="resume-body">
+                    <div class="section">
+                        <h3>Summary</h3>
+                        <p id="previewSummary">Professional summary will appear here.</p>
+                    </div>
+
+                    <div class="section">
+                        <h3>Skills</h3>
+                        <ul id="previewSkills">
+                            <li>Skill 1</li>
+                            <li>Skill 2</li>
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <h3>Experience</h3>
+                        <p id="previewExperience">Your work experience goes here.</p>
+                    </div>
+
+                    <div class="section">
+                        <h3>Education</h3>
+                        <p id="previewEducation">Your education details go here.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="download-btn" onclick="printResume()">Download PDF</button>
+        </div>
+    </div>
+
+    <!-- Footer with AdSense & Legal -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 ResumeMaker Pro. All rights reserved.</p>
+            <p><a href="/privacy-policy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
+            
+            <!-- ADSENSE PLACEHOLDER: Put your ad code here later -->
+            <div class="adsense-slot">
+                <p style="color: #ccc; font-size: 12px;">AdSense Slot (Top of Footer)</p>
+                <!-- Paste your <ins> tag here -->
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
