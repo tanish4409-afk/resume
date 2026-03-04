@@ -3,378 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ResumeMaker Pro | 3D Resume Builder</title>
-    <meta name="description" content="Create professional resumes with our 3D animated resume builder. Free, fast, and SEO friendly.">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Three.js (For 3D Animation) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
+    <title>ProResume Builder - Create Your CV Online</title>
     <style>
-        /* --- GLOBAL STYLES --- */
         :root {
-            --primary: #4a90e2;
-            --dark: #1a1a2e;
-            --light: #f4f7f6;
+            --primary: #2563eb;
+            --bg: #f3f4f6;
+            --text: #1f2937;
         }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-            background: var(--light);
-            color: #333;
-        }
-
-        /* --- 1. WELCOME SCREEN (3D) --- */
-        #welcome-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: #0f0c29;  /* Fallback */
-            background: linear-gradient(to bottom, #24243e, #302b63, #0f0c29);
-            z-index: 999;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+            min-height: 100vh;
         }
 
-        #canvas-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .welcome-content {
-            z-index: 2;
-            text-align: center;
-            color: white;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1.5s forwards 0.5s;
-        }
-
-        .welcome-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-
-        .welcome-content p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.8;
-        }
-
-        .btn-start {
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            background: #e94560;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 10px 20px rgba(233, 69, 96, 0.4);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: bold;
-        }
-
-        .btn-start:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(233, 69, 96, 0.6);
-        }
-
-        /* --- 2. APP SCREEN (RESUME EDITOR) --- */
-        #app-screen {
-            display: none; /* Hidden initially */
-            opacity: 0;
-            transition: opacity 1s ease;
-            padding-bottom: 50px;
-        }
-
-        header {
+        /* Navigation */
+        nav {
             background: white;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .brand { font-weight: 700; font-size: 1.5rem; color: #1a1a2e; }
+        .logo { font-weight: bold; font-size: 1.5rem; color: var(--primary); }
+        .nav-links a { margin-left: 20px; text-decoration: none; color: var(--text); }
+        .nav-links a:hover { color: var(--primary); }
 
-        .main-container {
+        /* Main Layout */
+        .container {
             display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .editor-section {
             flex: 1;
-            min-width: 350px;
+            padding: 2rem;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Editor Section (Left) */
+        .editor-panel {
+            flex: 1;
             background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            max-width: 500px;
         }
 
-        .preview-section {
-            flex: 1.2;
-            min-width: 350px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Form Styling */
-        .form-group { margin-bottom: 25px; }
-        .form-group h3 { margin-bottom: 15px; color: #1a1a2e; font-size: 1rem; border-left: 4px solid #e94560; padding-left: 10px; }
-        
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; }
         input, textarea {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: inherit;
-            transition: border 0.3s;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
-        
-        input:focus, textarea:focus { border-color: #e94560; outline: none; }
+        textarea { height: 100px; resize: vertical; }
 
-        /* Resume Paper Styling */
-        .paper {
-            background: white;
-            width: 100%;
-            max-width: 210mm; /* A4 */
-            min-height: 297mm;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            border-radius: 5px;
-            position: relative;
-        }
-
-        /* Resume Design */
-        .resume-header { border-bottom: 2px solid #333; padding-bottom: 20px; margin-bottom: 20px; text-align: center; }
-        .resume-header h1 { font-size: 2.5rem; text-transform: uppercase; color: #333; margin-bottom: 5px; }
-        .resume-header p { font-size: 1.1rem; color: #666; font-weight: 600; }
-        .contact-info { font-size: 0.9rem; color: #555; margin-top: 10px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;}
-        
-        .section { margin-bottom: 25px; }
-        .section h3 { text-transform: uppercase; color: #1a1a2e; border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-bottom: 15px; font-size: 1.1rem; border-left: none; }
-        .section ul { padding-left: 20px; }
-        .section li { margin-bottom: 5px; color: #444; }
-
-        .btn-download {
-            margin-top: 30px;
-            padding: 15px 50px;
-            background: #4a90e2;
+        .btn {
+            background: var(--primary);
             color: white;
             border: none;
-            border-radius: 30px;
-            font-size: 1.1rem;
+            padding: 10px 20px;
+            border-radius: 4px;
             cursor: pointer;
-            transition: background 0.3s;
-            width: auto;
-            display: inline-block;
-        }
-        .btn-download:hover { background: #357abd; }
-
-        /* --- 3. DOWNLOAD ANIMATION OVERLAY --- */
-        #download-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
+            font-size: 1rem;
             width: 100%;
-            height: 100%;
-            background: rgba(255,255,255,0.95);
-            z-index: 2000;
+            margin-top: 1rem;
+        }
+        .btn:hover { background: #1d4ed8; }
+
+        /* Preview Section (Right) */
+        .preview-panel {
+            flex: 1.5;
             display: flex;
-            flex-direction: column;
             justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s;
+            background: #525659;
+            padding: 2rem;
+            border-radius: 8px;
+            overflow-y: auto;
         }
 
-        #download-overlay.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .loader {
-            width: 80px;
-            height: 100px;
-            background: #e94560;
-            position: relative;
-            transform: skew(-10deg);
-            box-shadow: -10px 10px 0 #ccc;
-            animation: slide 1s infinite alternate;
-        }
-        
-        .loader::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        /* The A4 Paper */
+        #resume-preview {
             background: white;
-            transform: translate(10px, -10px);
-            z-index: -1;
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            box-sizing: border-box;
+            font-size: 12pt;
+            line-height: 1.5;
         }
 
-        @keyframes slide {
-            0% { transform: skew(-10deg) translateY(0); }
-            100% { transform: skew(-10deg) translateY(-20px); }
-        }
-
-        .loading-text {
-            margin-top: 20px;
-            font-size: 1.5rem;
-            color: #333;
+        /* Resume Styling */
+        .res-header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 20px; }
+        .res-name { font-size: 24pt; font-weight: bold; margin: 0; }
+        .res-title { font-size: 14pt; color: #555; margin: 5px 0; }
+        .res-contact { font-size: 10pt; color: #666; }
+        
+        .res-section { margin-bottom: 20px; }
+        .res-section-title {
+            font-size: 14pt;
             font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        .res-content { white-space: pre-wrap; }
+
+        /* AdSense Placeholder */
+        .ad-space {
+            background: #e5e7eb;
+            color: #6b7280;
+            text-align: center;
+            padding: 10px;
+            margin: 20px 0;
+            border: 1px dashed #9ca3af;
+            font-size: 0.8rem;
         }
 
         /* Footer */
         footer {
+            background: #1f2937;
+            color: white;
             text-align: center;
-            padding: 20px;
-            background: #fff;
-            margin-top: 50px;
-            font-size: 0.9rem;
-            color: #777;
+            padding: 2rem;
+            margin-top: auto;
         }
+        footer a { color: #9ca3af; text-decoration: none; margin: 0 10px; }
 
-        /* Responsive */
-        @media(max-width: 768px) {
-            .main-container { flex-direction: column; }
-            .paper { padding: 20px; min-height: auto; }
-            .welcome-content h1 { font-size: 2.5rem; }
-        }
-
-        /* Hide elements during Print */
-        @media print {
-            body * { visibility: hidden; }
-            #resumePreview, #resumePreview * { visibility: visible; }
-            #resumePreview { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 20px; box-shadow: none; }
-            header, .editor-section, .btn-download, footer { display: none !important; }
-            .main-container { display: block; margin: 0; padding: 0; }
-        }
-
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
+        /* Mobile Responsive */
+        @media (max-width: 900px) {
+            .container { flex-direction: column; }
+            .editor-panel { max-width: 100%; }
+            #resume-preview { width: 100%; min-height: auto; transform: scale(0.6); transform-origin: top left; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. WELCOME SCREEN -->
-    <div id="welcome-screen">
-        <div id="canvas-container"></div>
-        <div class="welcome-content">
-            <h1>ResumeMaker Pro</h1>
-            <p>Build your future with a professional 3D experience.</p>
-            <button class="btn-start" onclick="enterApp()">Create Resume</button>
+    <nav>
+        <div class="logo">ProResume Builder</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Templates</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Input Form -->
+        <div class="editor-panel">
+            <h2>Edit Your Resume</h2>
+            <p style="color: #666; font-size: 0.9rem;">Fill in the details below to see the live preview.</p>
+            
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="inputName" placeholder="John Doe" oninput="updateResume()">
+            </div>
+            <div class="form-group">
+                <label>Job Title</label>
+                <input type="text" id="inputTitle" placeholder="Software Engineer" oninput="updateResume()">
+            </div>
+            <div class="form-group">
+                <label>Contact Info (Email | Phone | City)</label>
+                <input type="text" id="inputContact" placeholder="john@email.com | 555-0101 | New York" oninput="updateResume()">
+            </div>
+            
+            <div class="form-group">
+                <label>Professional Summary</label>
+                <textarea id="inputSummary" placeholder="Briefly describe your experience..." oninput="updateResume()"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Work Experience</label>
+                <textarea id="inputExperience" placeholder="Job Title, Company, Date&#10;- Achievement 1&#10;- Achievement 2" oninput="updateResume()"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Education</label>
+                <textarea id="inputEducation" placeholder="Degree, University, Year" oninput="updateResume()"></textarea>
+            </div>
+
+            <button class="btn" onclick="window.print()">Download PDF</button>
+        </div>
+
+        <!-- Live Preview -->
+        <div class="preview-panel">
+            <!-- AdSense Slot 1 (Sidebar) -->
+            <div class="ad-space">
+                Google AdSense Space (Sidebar)
+            </div>
+
+            <div id="resume-preview">
+                <div class="res-header">
+                    <h1 class="res-name" id="outName">Your Name</h1>
+                    <div class="res-title" id="outTitle">Job Title</div>
+                    <div class="res-contact" id="outContact">email@example.com | 123-456-7890</div>
+                </div>
+
+                <div class="res-section">
+                    <div class="res-section-title">Profile</div>
+                    <div class="res-content" id="outSummary">
+                        A dedicated professional with a strong background in...
+                    </div>
+                </div>
+
+                <div class="res-section">
+                    <div class="res-section-title">Experience</div>
+                    <div class="res-content" id="outExperience">
+                        Senior Developer at Tech Corp (2020-Present)
+                        - Led a team of 5 developers
+                        - Increased efficiency by 20%
+                    </div>
+                </div>
+
+                <div class="res-section">
+                    <div class="res-section-title">Education</div>
+                    <div class="res-content" id="outEducation">
+                        Bachelor of Science in Computer Science
+                        University of Technology, 2019
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- 2. APPLICATION SCREEN -->
-    <div id="app-screen">
-        <header>
-            <div class="brand">ResumeMaker Pro</div>
-            <button class="btn-start" style="font-size: 0.9rem; padding: 10px 20px;" onclick="window.print()">Quick Print</button>
-        </header>
-
-        <div class="main-container">
-            <!-- Form -->
-            <div class="editor-section">
-                <div class="form-group">
-                    <h3>Personal Details</h3>
-                    <input type="text" id="name" placeholder="Full Name" oninput="updateResume()">
-                    <input type="text" id="jobtitle" placeholder="Job Title" oninput="updateResume()">
-                    <input type="text" id="phone" placeholder="Phone" oninput="updateResume()">
-                    <input type="email" id="email" placeholder="Email" oninput="updateResume()">
-                    <input type="text" id="linkedin" placeholder="LinkedIn URL" oninput="updateResume()">
-                </div>
-                <div class="form-group">
-                    <h3>Summary</h3>
-                    <textarea rows="3" id="summary" placeholder="Professional Summary..." oninput="updateResume()"></textarea>
-                </div>
-                <div class="form-group">
-                    <h3>Skills (Comma separated)</h3>
-                    <input type="text" id="skills" placeholder="HTML, CSS, JS, Design..." oninput="updateResume()">
-                </div>
-                <div class="form-group">
-                    <h3>Experience</h3>
-                    <textarea rows="4" id="experience" placeholder="Job Title - Company (Year-Year)&#10;Details..." oninput="updateResume()"></textarea>
-                </div>
-                <div class="form-group">
-                    <h3>Education</h3>
-                    <textarea rows="3" id="education" placeholder="Degree - University (Year-Year)" oninput="updateResume()"></textarea>
-                </div>
-            </div>
-
-            <!-- Preview -->
-            <div class="preview-section">
-                <div id="resumePreview" class="paper">
-                    <div class="resume-header">
-                        <h1 id="previewName">YOUR NAME</h1>
-                        <p id="previewJobtitle">Job Title</p>
-                        <div class="contact-info">
-                            <span id="previewPhone">Phone</span> | 
-                            <span id="previewEmail">Email</span> | 
-                            <span id="previewLinkedin">LinkedIn</span>
-                        </div>
-                    </div>
-                    <div class="resume-body">
-                        <div class="section">
-                            <h3>Profile</h3>
-                            <p id="previewSummary">A passionate professional ready to work.</p>
-                        </div>
-                        <div class="section">
-                            <h3>Skills</h3>
-                            <ul id="previewSkills">
-                                <li>Skill 1</li>
-                                <li>Skill 2</li>
-                            </ul>
-                        </div>
-                        <div class="section">
-                            <h3>Experience</h3>
-                            <p id="previewExperience">Your work history goes here.</p>
-                        </div>
-                        <div class="section">
-                            <h3>Education</h3>
-                            <p id="previewEducation">Your education details go here.</p>
-                        </div>
-                    </div>
-                </div>
-                <button class="btn-download" onclick="triggerDownload()">Download PDF</button>
-            </div>
-        </div>
-        
-        <footer>
-            <p>&copy; 2023 ResumeMaker Pro. All rights reserved.</p>
-            <p><a href="#">Privacy Policy</a></p>
-            <!-- AdSense Placeholder -->
-            <div style="margin-top:10px; background:#eee; height:50px; width:300px; margin: 10px auto; display:flex; align-items:center; justify-content:center; color:#999; font-size:10px;">AdSense Slot (Footer)</div>
-        </footer>
+    <!-- AdSense Slot 2 (Bottom) -->
+    <div class="ad-space" style="max-width: 1200px; margin: 0 auto; width: 100%;">
+        Google AdSense Space (Bottom Banner)
     </div>
 
-    <!-- 3
+    <footer>
+        <p>&copy; 2023 ProResume Builder. All rights reserved.</p>
+        <div>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact Us</a>
+        </div>
+    </footer>
+
+    <script>
+        function updateResume() {
+            // Get values
+            const name = document.getElementById('inputName').value;
+            const title = document.getElementById('inputTitle').value;
+            const contact = document.getElementById('inputContact').value;
+            const summary = document.getElementById('inputSummary').value;
+            const experience = document.getElementById('inputExperience').value;
+            const education = document.getElementById('inputEducation').value;
+
+            // Set values (with fallbacks)
+            document.getElementById('outName').innerText = name || "Your Name";
+            document.getElementById('outTitle').innerText = title || "Job Title";
+            document.getElementById('outContact').innerText = contact || "email@example.com | 123-456-7890";
+            document.getElementById('outSummary').innerText = summary || "A dedicated professional with a strong background in...";
+            document.getElementById('outExperience').innerText = experience || "Senior Developer at Tech Corp (2020-Present)\n- Led a team of 5 developers\n- Increased efficiency by 20%";
+            document.getElementById('outEducation').innerText = education || "Bachelor of Science in Computer Science\nUniversity of Technology, 2019";
+        }
+    </script>
+</body>
+</html>
