@@ -4,285 +4,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProResume Builder - Create Your CV Online</title>
-    
-    <!-- ADSENSE LOADER SCRIPT -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3278025401135303"
-     crossorigin="anonymous"></script>
-    
+
+    <!-- Google AdSense Script (ADD ONLY ONCE) -->
+    <script async 
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3278025401135303"
+        crossorigin="anonymous"></script>
+
     <style>
         :root {
             --primary: #2563eb;
             --bg: #f3f4f6;
             --text: #1f2937;
         }
-        
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: var(--bg);
-            color: var(--text);
+            background: var(--bg);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* Navigation */
         nav {
             background: white;
             padding: 1rem 2rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             display: flex;
             justify-content: space-between;
-            align-items: center;
         }
 
-        .logo { font-weight: bold; font-size: 1.5rem; color: var(--primary); }
-        .nav-links a { margin-left: 20px; text-decoration: none; color: var(--text); }
-        .nav-links a:hover { color: var(--primary); }
+        .logo { font-weight: bold; font-size: 1.4rem; color: var(--primary); }
 
-        /* Main Layout */
         .container {
             display: flex;
             flex: 1;
             padding: 2rem;
             gap: 2rem;
             max-width: 1400px;
-            margin: 0 auto;
+            margin: auto;
             width: 100%;
         }
 
-        /* Editor Section (Left) */
         .editor-panel {
             flex: 1;
             background: white;
             padding: 2rem;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             max-width: 500px;
         }
 
-        .form-group { margin-bottom: 1rem; }
-        label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; }
         input, textarea {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
             border-radius: 4px;
-            box-sizing: border-box;
         }
-        textarea { height: 100px; resize: vertical; }
 
         .btn {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
+            padding: 10px;
             cursor: pointer;
-            font-size: 1rem;
             width: 100%;
-            margin-top: 1rem;
         }
-        .btn:hover { background: #1d4ed8; }
 
-        /* Preview Section (Right) */
         .preview-panel {
             flex: 1.5;
-            display: flex;
-            justify-content: center;
             background: #525659;
             padding: 2rem;
             border-radius: 8px;
             overflow-y: auto;
         }
 
-        /* The A4 Paper */
         #resume-preview {
             background: white;
             width: 210mm;
             min-height: 297mm;
             padding: 20mm;
-            box-shadow: 0 0 15px rgba(0,0,0,0.3);
-            box-sizing: border-box;
-            font-size: 12pt;
-            line-height: 1.5;
         }
 
-        /* Resume Styling */
-        .res-header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 20px; }
-        .res-name { font-size: 24pt; font-weight: bold; margin: 0; }
-        .res-title { font-size: 14pt; color: #555; margin: 5px 0; }
-        .res-contact { font-size: 10pt; color: #666; }
-        
-        .res-section { margin-bottom: 20px; }
-        .res-section-title {
-            font-size: 14pt;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-bottom: 1px solid #ccc;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-        .res-content { white-space: pre-wrap; }
-
-        /* Footer */
         footer {
             background: #1f2937;
             color: white;
             text-align: center;
-            padding: 2rem;
-            margin-top: auto;
-        }
-        footer a { color: #9ca3af; text-decoration: none; margin: 0 10px; }
-
-        /* Mobile Responsive */
-        @media (max-width: 900px) {
-            .container { flex-direction: column; }
-            .editor-panel { max-width: 100%; }
-            #resume-preview { width: 100%; min-height: auto; transform: scale(0.6); transform-origin: top left; }
+            padding: 1rem;
         }
     </style>
 </head>
+
 <body>
 
-    <nav>
-        <div class="logo">ProResume Builder</div>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Templates</a>
-            <a href="#">Blog</a>
-            <a href="#">Contact</a>
-        </div>
-    </nav>
+<nav>
+    <div class="logo">ProResume Builder</div>
+</nav>
 
-    <div class="container">
-        <!-- Input Form -->
-        <div class="editor-panel">
-            <h2>Edit Your Resume</h2>
-            <p style="color: #666; font-size: 0.9rem;">Fill in the details below to see the live preview.</p>
-            
-            <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" id="inputName" placeholder="John Doe" oninput="updateResume()">
-            </div>
-            <div class="form-group">
-                <label>Job Title</label>
-                <input type="text" id="inputTitle" placeholder="Software Engineer" oninput="updateResume()">
-            </div>
-            <div class="form-group">
-                <label>Contact Info (Email | Phone | City)</label>
-                <input type="text" id="inputContact" placeholder="john@email.com | 555-0101 | New York" oninput="updateResume()">
-            </div>
-            
-            <div class="form-group">
-                <label>Professional Summary</label>
-                <textarea id="inputSummary" placeholder="Briefly describe your experience..." oninput="updateResume()"></textarea>
-            </div>
+<div class="container">
 
-            <div class="form-group">
-                <label>Work Experience</label>
-                <textarea id="inputExperience" placeholder="Job Title, Company, Date&#10;- Achievement 1&#10;- Achievement 2" oninput="updateResume()"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label>Education</label>
-                <textarea id="inputEducation" placeholder="Degree, University, Year" oninput="updateResume()"></textarea>
-            </div>
-
-            <button class="btn" onclick="window.print()">Download PDF</button>
-        </div>
-
-        <!-- Live Preview -->
-        <div class="preview-panel">
-            
-            <!-- ADSENSE SLOT 1 (Sidebar) -->
-            <!-- Replace YOUR_AD_SLOT_ID_HERE with your actual slot ID -->
-            <ins class="adsbygoogle"
-                 style="display:block; margin-bottom: 20px;"
-                 data-ad-client="ca-pub-3278025401135303"
-                 data-ad-slot="YOUR_AD_SLOT_ID_HERE"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-
-            <div id="resume-preview">
-                <div class="res-header">
-                    <h1 class="res-name" id="outName">Your Name</h1>
-                    <div class="res-title" id="outTitle">Job Title</div>
-                    <div class="res-contact" id="outContact">email@example.com | 123-456-7890</div>
-                </div>
-
-                <div class="res-section">
-                    <div class="res-section-title">Profile</div>
-                    <div class="res-content" id="outSummary">
-                        A dedicated professional with a strong background in...
-                    </div>
-                </div>
-
-                <div class="res-section">
-                    <div class="res-section-title">Experience</div>
-                    <div class="res-content" id="outExperience">
-                        Senior Developer at Tech Corp (2020-Present)
-                        - Led a team of 5 developers
-                        - Increased efficiency by 20%
-                    </div>
-                </div>
-
-                <div class="res-section">
-                    <div class="res-section-title">Education</div>
-                    <div class="res-content" id="outEducation">
-                        Bachelor of Science in Computer Science
-                        University of Technology, 2019
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="editor-panel">
+        <h2>Edit Resume</h2>
+        <input type="text" id="inputName" placeholder="Full Name" oninput="updateResume()">
+        <input type="text" id="inputTitle" placeholder="Job Title" oninput="updateResume()">
+        <textarea id="inputSummary" placeholder="Summary" oninput="updateResume()"></textarea>
+        <button class="btn" onclick="window.print()">Download PDF</button>
     </div>
 
-    <!-- ADSENSE SLOT 2 (Bottom Banner) -->
-    <!-- Replace YOUR_AD_SLOT_ID_HERE with your actual slot ID -->
-    <div style="max-width: 1200px; margin: 0 auto; width: 100%; padding: 20px;">
+    <div class="preview-panel">
+
+        <!-- SIDEBAR ADSENSE -->
         <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-3278025401135303"
-             data-ad-slot="YOUR_AD_SLOT_ID_HERE"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
+            style="display:block; margin-bottom:20px;"
+            data-ad-client="ca-pub-3278025401135303"
+            data-ad-slot="1234567890"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
         <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
+            (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
-    </div>
 
-    <footer>
-        <p>&copy; 2023 ProResume Builder. All rights reserved.</p>
-        <div>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Contact Us</a>
+        <div id="resume-preview">
+            <h1 id="outName">Your Name</h1>
+            <h3 id="outTitle">Job Title</h3>
+            <p id="outSummary">Your professional summary will appear here.</p>
         </div>
-    </footer>
 
+    </div>
+</div>
+
+<!-- BOTTOM BANNER ADSENSE -->
+<div style="max-width:1200px;margin:auto;padding:20px;">
+    <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-3278025401135303"
+        data-ad-slot="9876543210"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
     <script>
-        function updateResume() {
-            // Get values
-            const name = document.getElementById('inputName').value;
-            const title = document.getElementById('inputTitle').value;
-            const contact = document.getElementById('inputContact').value;
-            const summary = document.getElementById('inputSummary').value;
-            const experience = document.getElementById('inputExperience').value;
-            const education = document.getElementById('inputEducation').value;
-
-            // Set values (with fallbacks)
-            document.getElementById('outName').innerText = name || "Your Name";
-            document.getElementById('outTitle').innerText = title || "Job Title";
-            document.getElementById('outContact').innerText = contact || "email@example.com | 123-456-7890";
-            document.getElementById('outSummary').innerText = summary || "A dedicated professional with a strong background in...";
-            document.getElementById('outExperience').innerText = experience || "Senior Developer at Tech Corp (2020-Present)\n- Led a team of 5 developers\n- Increased efficiency by 20%";
-            document.getElementById('outEducation').innerText = education || "Bachelor of Science in Computer Science\nUniversity of Technology, 2019";
-        }
+        (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
+</div>
+
+<footer>
+    © 2026 ProResume Builder
+</footer>
+
+<script>
+function updateResume() {
+    document.getElementById("outName").innerText =
+        document.getElementById("inputName").value || "Your Name";
+
+    document.getElementById("outTitle").innerText =
+        document.getElementById("inputTitle").value || "Job Title";
+
+    document.getElementById("outSummary").innerText =
+        document.getElementById("inputSummary").value || 
+        "Your professional summary will appear here.";
+}
+</script>
+
 </body>
 </html>
