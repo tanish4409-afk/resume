@@ -3,567 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProResume Builder - Create Your CV Online</title>
+    <title>ProResume Builder - Create Your CV</title>
     
-    <!-- ADSENSE LOADER SCRIPT -->
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- ADSENSE BASE SCRIPT (As Requested) -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3278025401135303"
      crossorigin="anonymous"></script>
-    
+
     <style>
         :root {
             --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --primary-light: #3b82f6;
+            --secondary: #1e40af;
             --bg: #f3f4f6;
             --text: #1f2937;
-            --transition: all 0.3s ease;
+            --white: #ffffff;
         }
-        
+
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', sans-serif;
             background-color: var(--bg);
             color: var(--text);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Navigation */
-        nav {
-            background: white;
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        /* HEADER */
+        header {
+            background: var(--white);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
-            z-index: 1000;
-            animation: slideDown 0.5s ease-out;
+            z-index: 100;
         }
 
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .logo { 
-            font-weight: bold; 
-            font-size: 1.5rem; 
-            color: var(--primary);
-            animation: fadeIn 0.5s ease-out;
-            position: relative;
-        }
-
-        .logo::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-
-        .logo:hover::after {
-            width: 100%;
-        }
-
-        .nav-links a { 
-            margin-left: 20px; 
-            text-decoration: none; 
-            color: var(--text);
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover { 
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--primary);
         }
 
-        .nav-links a:hover::before {
+        /* ADSENSE CONTAINER */
+        .ad-container {
             width: 100%;
-        }
-
-        /* Main Layout */
-        .container {
+            max-width: 728px;
+            height: 90px;
+            background: #e5e7eb;
+            margin: 20px auto;
             display: flex;
-            flex: 1;
-            padding: 2rem;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            border: 1px dashed #9ca3af;
+        }
+
+        /* MAIN LAYOUT */
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-            animation: fadeIn 0.8s ease-out;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Editor Section (Left) */
+        /* FORM SECTION */
         .editor-panel {
-            flex: 1;
-            background: white;
+            background: var(--white);
             padding: 2rem;
-            border-radius: 8px;
+            border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            max-width: 500px;
-            animation: slideInLeft 0.6s ease-out;
-            position: relative;
-            overflow: hidden;
+            height: fit-content;
         }
 
-        @keyframes slideInLeft {
-            from {
-                transform: translateX(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+        .form-group {
+            margin-bottom: 1.5rem;
         }
 
-        .editor-panel::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--primary-light));
-            animation: gradientMove 2s ease infinite;
-        }
-
-        @keyframes gradientMove {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .form-group { 
-            margin-bottom: 1rem; 
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .form-group:hover {
-            transform: translateX(5px);
-        }
-
-        label { 
-            display: block; 
-            margin-bottom: 0.5rem; 
-            font-weight: 600; 
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
             font-size: 0.9rem;
-            transition: var(--transition);
         }
 
         input, textarea {
             width: 100%;
             padding: 0.75rem;
-            border: 2px solid #d1d5db;
-            border-radius: 4px;
-            box-sizing: border-box;
-            transition: var(--transition);
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-family: inherit;
+            transition: all 0.3s ease;
         }
 
         input:focus, textarea:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-            transform: scale(1.02);
         }
 
-        textarea { 
-            height: 100px; 
-            resize: vertical; 
-        }
-
-        .btn {
+        button.print-btn {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
+            padding: 1rem 2rem;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 1rem;
+            font-weight: 700;
             width: 100%;
-            margin-top: 1rem;
-            position: relative;
-            overflow: hidden;
-            transition: var(--transition);
-            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
+            transition: transform 0.2s, background 0.2s;
         }
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: var(--transition);
-        }
-
-        .btn:hover {
-            background: var(--primary-dark);
+        button.print-btn:hover {
+            background: var(--secondary);
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.4);
         }
 
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        /* Preview Section (Right) */
+        /* PREVIEW SECTION */
         .preview-panel {
-            flex: 1.5;
-            display: flex;
-            justify-content: center;
-            background: #525659;
+            background: var(--white);
             padding: 2rem;
-            border-radius: 8px;
-            overflow-y: auto;
-            animation: slideInRight 0.6s ease-out;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            min-height: 800px;
             position: relative;
         }
 
-        @keyframes slideInRight {
-            from {
-                transform: translateX(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        /* The A4 Paper */
+        /* RESUME PAPER STYLING */
         #resume-preview {
             background: white;
-            width: 210mm;
-            min-height: 297mm;
-            padding: 20mm;
-            box-shadow: 0 0 15px rgba(0,0,0,0.3);
-            box-sizing: border-box;
-            font-size: 12pt;
-            line-height: 1.5;
-            animation: paperIn 0.8s ease-out;
-            position: relative;
-            overflow: hidden;
+            padding: 2rem;
+            border: 1px solid #e5e7eb;
+            min-height: 100%;
         }
 
-        @keyframes paperIn {
-            0% {
-                transform: scale(0.9) rotateY(10deg);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(1) rotateY(0);
-                opacity: 1;
-            }
+        .res-header {
+            border-bottom: 2px solid var(--text);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        #resume-preview::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, transparent 100%);
-            pointer-events: none;
+        .res-name {
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
         }
 
-        /* Resume Styling */
-        .res-header { 
-            text-align: center; 
-            border-bottom: 2px solid #333; 
-            padding-bottom: 10px; 
-            margin-bottom: 20px;
-            animation: headerIn 0.5s ease-out;
+        .res-role {
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
         }
 
-        @keyframes headerIn {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .res-section {
+            margin-bottom: 1.5rem;
         }
-
-        .res-name { 
-            font-size: 24pt; 
-            font-weight: bold; 
-            margin: 0;
-            animation: nameIn 0.5s ease-out 0.2s both;
-        }
-
-        @keyframes nameIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .res-title { 
-            font-size: 14pt; 
-            color: #555; 
-            margin: 5px 0;
-            animation: titleIn 0.5s ease-out 0.3s both;
-        }
-
-        @keyframes titleIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .res-contact { 
-            font-size: 10pt; 
-            color: #666;
-            animation: contactIn 0.5s ease-out 0.4s both;
-        }
-
-        @keyframes contactIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .res-section { 
-            margin-bottom: 20px;
-            animation: sectionIn 0.5s ease-out;
-        }
-
-        @keyframes sectionIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .res-section:nth-child(2) { animation-delay: 0.1s; }
-        .res-section:nth-child(3) { animation-delay: 0.2s; }
-        .res-section:nth-child(4) { animation-delay: 0.3s; }
 
         .res-section-title {
-            font-size: 14pt;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-bottom: 1px solid #ccc;
-            margin-bottom: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
             color: var(--primary);
-            position: relative;
-            display: inline-block;
-            animation: titleUnderline 0.5s ease-out;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        @keyframes titleUnderline {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100%;
-            }
+        .res-content {
+            font-size: 0.95rem;
+            white-space: pre-line; /* Preserves line breaks */
         }
 
-        .res-content { 
-            white-space: pre-wrap;
-            animation: contentIn 0.5s ease-out;
-        }
-
-        @keyframes contentIn {
-            from {
-                opacity: 0;
-                transform: translateX(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
             }
         }
 
-        /* AdSense Styling */
-        .ad-space {
-            background: #e5e7eb;
-            color: #6b7280;
-            text-align: center;
-            padding: 10px;
-            margin: 20px 0;
-            border: 1px dashed #9ca3af;
-            font-size: 0.8rem;
-            border-radius: 4px;
-            animation: adFadeIn 0.5s ease-out;
-        }
-
-        @keyframes adFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* Footer */
-        footer {
-            background: #1f2937;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: auto;
-            animation: footerIn 0.5s ease-out;
-        }
-
-        @keyframes footerIn {
-            from {
-                transform: translateY(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        footer a { 
-            color: #9ca3af; 
-            text-decoration: none; 
-            margin: 0 10px;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        footer a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: white;
-            transition: var(--transition);
-        }
-
-        footer a:hover { 
-            color: white;
-        }
-
-        footer a:hover::after {
-            width: 100%;
-        }
-
-        /* Loading Animation */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255,255,255,0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            animation: fadeOut 0.5s ease-out 2s forwards;
-        }
-
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
+        /* PRINT STYLES */
+        @media print {
+            body * {
                 visibility: hidden;
             }
-        }
-
-        .loader {
-            width: 50px;
-            height: 50px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Ripple Effect */
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-            transform: scale(0);
-            animation: ripple 0.6s linear;
-            pointer-events: none;
-        }
-
-        @keyframes ripple {
-            to {
-                transform: scale(4);
-                opacity: 0;
+            .ad-container, .editor-panel, header, button {
+                display: none;
             }
+            #resume-preview, #resume-preview * {
+                visibility: visible;
+            }
+            #resume-preview {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                border: none;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">ResumeBuilder</div>
+        <div style="font-size: 0.9rem; color: #666;">Free & Easy</div>
+    </header>
+
+    <!-- ADSENSE AD UNIT PLACEHOLDER -->
+    <!-- IMPORTANT: Replace the content inside this div with your actual AdSense Ad Unit Code -->
+    <div class="ad-container">
+        <!-- Paste your AdSense Ad Unit Code Here (e.g., <ins class="adsbygoogle" ...>...</ins>) -->
+        <span>Advertisement Space</span>
+    </div>
+
+    <div class="container fade-in">
+        <!-- INPUT FORM -->
+        <div class="editor-panel">
+            <h2 style="margin-bottom: 1.5rem;">Edit Details</h2>
+            
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="inputName" placeholder="John Doe" oninput="updateResume()">
+            </div>
+
+            <div class="form-group">
+                <label>Job Title</label>
+                <input type="text" id="inputRole" placeholder="Software Engineer" oninput="updateResume()">
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="inputEmail" placeholder="john@example.com" oninput="updateResume()">
+            </div>
+
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="text" id="inputPhone" placeholder="+1 234 567 890" oninput="updateResume()">
+            </div>
+
+            <div class="form-group">
+                <label>Professional Summary</label>
+                <textarea id="inputSummary" rows="4" placeholder="Brief summary of your career..." oninput="updateResume()"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Work Experience</label>
+                <textarea id="inputExperience" rows="6" placeholder="Job Title, Company, Date&#10;- Achieved X&#10;- Managed Y" oninput="updateResume()"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Education</label>
+                <textarea id="inputEducation" rows="4" placeholder="Degree, University, Year" oninput="updateResume()"></textarea>
+            </div>
+
+            <button class="print-btn" onclick="window.print()">Download / Print PDF</button>
+        </div>
+
+        <!-- LIVE PREVIEW -->
+        <div class="preview-panel">
+            <h3 style="margin-bottom: 1rem; color: #666; font-size: 0.9rem;">Live Preview</h3>
+            <div id="resume-preview">
+                <div class="res-header">
+                    <div class="res-name" id="outName">Your Name</div>
+                    <div class="res-role" id="outRole">Job Title</div>
+                    <div style="margin-top: 10px; font-size: 0.9rem;">
+                        <span id="outEmail">email@example.com</span> | 
+                        <span id="outPhone">123-456-7890</span>
+                    </div>
+                </div>
+
+                <div class="res-section">
+                    <div class="res-section-title">Summary</div>
+                    <div class="res-content" id="outSummary">Your professional summary will appear here...</div>
+                </div>
+
+                <div class="res-section">
+                    <div class="res-section-title">Experience</div>
+                    <div class="res-content" id="outExperience">Your work experience will appear here...</div>
+                </div>
+
+                <div class="res-section">
+                    <div class="res-section-title">Education</div>
+                    <div class="res-content" id="outEducation">Your education details will appear here...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateResume() {
+            // Get values from inputs
+            const name = document.getElementById('inputName').value;
+            const role = document.getElementById('inputRole').value;
+            const email = document.getElementById('inputEmail').value;
+            const phone = document.getElementById('inputPhone').value;
+            const summary = document.getElementById('inputSummary').value;
+            const experience = document.getElementById('inputExperience').value;
+            const education = document.getElementById('inputEducation').value;
+
+            // Set values to preview
+            document.getElementById('outName').textContent = name || 'Your Name';
+            document.getElementById('outRole').textContent = role || 'Job Title';
+            document.getElementById('outEmail').textContent = email || 'email@example.com';
+            document.getElementById('outPhone').textContent = phone || '123-456-7890';
+            document.getElementById('outSummary').textContent = summary || 'Your professional summary will appear here...';
+            document.getElementById('outExperience').textContent = experience || 'Your work experience will appear here...';
+            document.getElementById('outEducation').textContent = education || 'Your education details will appear here...';
+        }
+    </script>
+</body>
+</html>
